@@ -1,10 +1,27 @@
 import React, { Component } from 'react';
+import SimpleWebRTC from 'simplewebrtc';
+
 import logo from './logo.svg';
 import './App.css';
 
+
 class App extends Component {
+
+  componentDidMount() {
+    var webrtc = new SimpleWebRTC({
+      localVideoEl: 'localVideo',
+      remoteVideosEl: 'remoteVideos',
+      autoRequestMedia: true
+    });
+
+    webrtc.on('readyToCall', function () {
+      webrtc.joinRoom('testRoom');
+    });
+  }
+
   render() {
     return (
+
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
@@ -20,6 +37,14 @@ class App extends Component {
             Learn React
           </a>
         </header>
+
+        <div className="videoDiv">
+          <div>
+            <video id="localVideo"></video>
+          </div>
+          <div id="remoteVideos"></div>
+        </div>
+
       </div>
     );
   }
