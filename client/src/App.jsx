@@ -7,18 +7,22 @@ import './App.css';
 
 class App extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      username: "Kennypoo"
+    };
 
     this.webrtc = new SimpleWebRTC({
       localVideoEl: 'localVideo',
       remoteVideosEl: 'remoteVideos',
       autoRequestMedia: true,
-      nick: 'Kennypoo',
     });
 
     this.handleChatSubmit = this.handleChatSubmit.bind(this);
     this.addToChat = this.addToChat.bind(this);
+    this.onChangeName = this.onChangeName.bind(this);
   }
 
 
@@ -28,11 +32,12 @@ class App extends Component {
 
     if (msg) {
       this.webrtc.sendDirectlyToAll('p2pchat', 'chat', {
+        username: this.state.username,
         message: msg,
       });
       event.target[0].placeholder = '';
       event.target[0].value = '';
-      this.addToChat('Me', msg);
+      this.addToChat(`${this.state.username} (me)`, msg);
     } else {
       event.target[0].placeholder = 'Cannot be blank';
     };
@@ -44,12 +49,17 @@ class App extends Component {
     document.querySelector('#text-chat').appendChild(newText);
   };
 
+  onChangeName(event) {
+    this.setState({username: event.target.value});
+  }
+
 
   componentDidMount() {
     const reactThis = this;
 
     this.webrtc.on('readyToCall', function () {
-      reactThis.webrtc.joinRoom('testRoom');
+      console.log("Joining room: ", reactThis.props.match.params.roomname);
+      reactThis.webrtc.joinRoom(reactThis.props.match.params.roomname);
     });
 
     this.webrtc.on('channelMessage', function (label, type, data) {
@@ -58,13 +68,16 @@ class App extends Component {
       // console.log('data: ', data);
 
       if (data.type === 'chat') {
-        reactThis.addToChat(label.nick, data.payload.message);
+        reactThis.addToChat(data.payload.username, data.payload.message);
       };
     });
   }
 
 
   render() {
+
+    // console.log("this.props: ", this.props);
+
     return (
       <div className="App">
         <header className="App-header">
@@ -83,11 +96,17 @@ class App extends Component {
         </div>
 
         <div className="chatDiv">
+
           <div id="text-chat"></div>
+
+          <span>Your name: </span>
+          <input onChange={this.onChangeName} value={this.state.username} />
+
           <form onSubmit={this.handleChatSubmit}>
-            <input id="chat-box" />
+            <input id="chat-box" placeholder="Enter chat message" />
             <input type="submit" value="Send" />
           </form>
+
         </div>
 
       </div>
