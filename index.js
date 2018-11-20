@@ -1,6 +1,11 @@
+const sslRedirect = require('heroku-ssl-redirect');
 const express = require('express');
 const path = require('path');
 const app = express();
+
+
+// Force https on Heroku
+app.use(sslRedirect());
 
 
 // Serve the static files from the React app
@@ -8,7 +13,7 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 
 
 app.get('/test', (req, res) => {
-  res.send({express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT'});
+  res.send({express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' });
 });
 
 
