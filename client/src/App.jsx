@@ -24,7 +24,7 @@ class App extends Component {
 
   handleChatSubmit(event) {
     event.preventDefault();
-    var msg = event.target[0].value;
+    let msg = event.target[0].value;
 
     if (msg) {
       this.webrtc.sendDirectlyToAll('p2pchat', 'chat', {
@@ -39,7 +39,7 @@ class App extends Component {
   }
 
   addToChat(name, message) {
-    var newText = document.createElement('p');
+    let newText = document.createElement('p');
     newText.textContent = `${name}: ${message}`;
     document.querySelector('#text-chat').appendChild(newText);
   };

@@ -3,8 +3,8 @@ const path = require('path');
 const app = express();
 
 
-// // Serve the static files from the React app
-// app.use(express.static(path.join(__dirname, 'client/build')));
+// Serve the static files from the React app
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 
 app.get('/express_backend', (req, res) => {
@@ -18,9 +18,9 @@ app.get('/api/getList', (req,res) => {
     console.log('Sent list of items');
 });
 
-// app.get('*', (req,res) =>{
-//     res.sendFile(path.join(__dirname+'/client/build/index.html'));
-// });
+app.get('*', (req,res) =>{
+    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
 
 
 const port = process.env.PORT || 5000;

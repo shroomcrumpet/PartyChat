@@ -1,11 +1,11 @@
 
 #localVideo {
-	max-height: 500px;
+	height: 250px;
 	background-color: pink;
 }
 
-#remoteVideos {
-	max-height: 500px;
+#remoteVideos video {
+	max-height: 250px;
 	background-color: yellow;
 }
 
