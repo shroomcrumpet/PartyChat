@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SimpleWebRTC from 'simplewebrtc';
+import generateName from 'sillyname';
 
 import logo from './logo.svg';
 import './App.css';
@@ -11,7 +12,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      username: "Kennypoo"
+      username: generateName(),
     };
 
     this.webrtc = new SimpleWebRTC({
