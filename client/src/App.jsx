@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import SimpleWebRTC from 'simplewebrtc';
 import generateName from 'sillyname';
 
-import logo from './logo.svg';
 import './App.css';
 
 
@@ -24,7 +23,7 @@ class App extends Component {
     this.handleChatSubmit = this.handleChatSubmit.bind(this);
     this.addToChat = this.addToChat.bind(this);
     this.onChangeName = this.onChangeName.bind(this);
-  }
+  };
 
 
   handleChatSubmit(event) {
@@ -42,7 +41,7 @@ class App extends Component {
     } else {
       event.target[0].placeholder = 'Cannot be blank';
     };
-  }
+  };
 
   addToChat(name, message) {
     let newText = document.createElement('p');
@@ -52,7 +51,7 @@ class App extends Component {
 
   onChangeName(event) {
     this.setState({username: event.target.value});
-  }
+  };
 
 
   componentDidMount() {
@@ -81,10 +80,6 @@ class App extends Component {
 
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <code>Partychat</code>
-        </header>
 
         <div className="videoDiv">
           <div>
