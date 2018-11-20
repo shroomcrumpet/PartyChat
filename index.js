@@ -7,9 +7,10 @@ const app = express();
 app.use(express.static(path.join(__dirname, 'client/build')));
 
 
-app.get('/express_backend', (req, res) => {
-  res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' });
+app.get('/test', (req, res) => {
+  res.send({express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT'});
 });
+
 
 // An api endpoint that returns a short list of items
 app.get('/api/getList', (req,res) => {
@@ -18,9 +19,13 @@ app.get('/api/getList', (req,res) => {
     console.log('Sent list of items');
 });
 
-app.get('*', (req,res) =>{
+app.get('*', (req,res) => {
     res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
+
+// app.get('/', (req, res) => {
+//   res.send('Hello from Express.js!');
+// });
 
 
 const port = process.env.PORT || 5000;
