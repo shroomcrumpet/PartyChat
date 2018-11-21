@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { withRouter } from 'react-router-dom';
+import * as UUID from "uuid";
 
 
 class Landing extends React.Component {
@@ -11,10 +11,14 @@ class Landing extends React.Component {
 
   routeToRoom(event){
     event.preventDefault();
-    let path = `/${event.target[0].value}`;
-    window.location = path;
+    let roomName;
 
-    // this.props.history.push(path);
+    if (!event.target[0].value.length) {
+      roomName = UUID.v4();
+    } else {
+      roomName = event.target[0].value;
+    };
+    window.location = `/${roomName}`;
   }
 
 
@@ -34,4 +38,3 @@ class Landing extends React.Component {
 
 
 export default Landing;
-// export default withRouter(Landing);

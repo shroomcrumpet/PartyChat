@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import SimpleWebRTC from 'simplewebrtc';
 import generateName from 'sillyname';
 
-import './App.css';
+import './App.scss';
 
 
 class App extends Component {
@@ -14,11 +13,13 @@ class App extends Component {
       username: generateName(),
     };
 
-    this.webrtc = new SimpleWebRTC({
-      localVideoEl: 'localVideo',
-      remoteVideosEl: 'remoteVideos',
-      autoRequestMedia: true,
-    });
+    this.CONFIG_URL = `https://api.simplewebrtc.com/config/guest/${process.env.REACT_APP_RTC_API_KEY}`
+
+    // this.webrtc = new SimpleWebRTC({
+    //   localVideoEl: 'localVideo',
+    //   remoteVideosEl: 'remoteVideos',
+    //   autoRequestMedia: true,
+    // });
 
     this.handleChatSubmit = this.handleChatSubmit.bind(this);
     this.addToChat = this.addToChat.bind(this);
@@ -30,17 +31,17 @@ class App extends Component {
     event.preventDefault();
     let msg = event.target[0].value;
 
-    if (msg) {
-      this.webrtc.sendDirectlyToAll('p2pchat', 'chat', {
-        username: this.state.username,
-        message: msg,
-      });
-      event.target[0].placeholder = '';
-      event.target[0].value = '';
-      this.addToChat(`${this.state.username} (me)`, msg);
-    } else {
-      event.target[0].placeholder = 'Cannot be blank';
-    };
+    // if (msg) {
+    //   this.webrtc.sendDirectlyToAll('p2pchat', 'chat', {
+    //     username: this.state.username,
+    //     message: msg,
+    //   });
+    //   event.target[0].placeholder = '';
+    //   event.target[0].value = '';
+    //   this.addToChat(`${this.state.username} (me)`, msg);
+    // } else {
+    //   event.target[0].placeholder = 'Cannot be blank';
+    // };
   };
 
   addToChat(name, message) {
@@ -57,26 +58,23 @@ class App extends Component {
   componentDidMount() {
     const reactThis = this;
 
-    this.webrtc.on('readyToCall', function () {
-      console.log("Joining room: ", reactThis.props.match.params.roomname);
-      reactThis.webrtc.joinRoom(reactThis.props.match.params.roomname);
-    });
+    console.log()
 
-    this.webrtc.on('channelMessage', function (label, type, data) {
-      // console.log('label: ', label);
-      // console.log('type: ', type);
-      // console.log('data: ', data);
+    // this.webrtc.on('readyToCall', function () {
+    //   console.log("Joining room: ", reactThis.props.match.params.roomname);
+    //   reactThis.webrtc.joinRoom(reactThis.props.match.params.roomname);
+    // });
 
-      if (data.type === 'chat') {
-        reactThis.addToChat(data.payload.username, data.payload.message);
-      };
-    });
+    // this.webrtc.on('channelMessage', function (label, type, data) {
+
+    //   if (data.type === 'chat') {
+    //     reactThis.addToChat(data.payload.username, data.payload.message);
+    //   };
+    // });
   }
 
 
   render() {
-
-    // console.log("this.props: ", this.props);
 
     return (
       <div className="App">

@@ -1,24 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
+import { Route, Switch, BrowserRouter as Router } from 'react-router-dom'
 import './index.css';
-import Landing from './Landing';
-import App from './App';
-import logo from './logo.svg';
+
+import Landing from './components/Landing';
+import App from './components/App';
+
+import react_logo from './react_logo.svg';
+
 
 const routing = (
   <Router>
     <div>
 
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <img src={react_logo} className="App-logo" alt="logo" />
         <a href='/'>
           <code>Partychat</code>
         </a>
       </header>
 
-      <Route exact path="/" component={Landing} />
-      <Route exact path="/:roomname" component={App} />
+      <Switch>
+        <Route exact path="/" component={Landing} />
+        <Route exact path="/:roomname" component={App} />
+      </Switch>
 
     </div>
   </Router>
