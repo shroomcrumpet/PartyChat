@@ -39,7 +39,7 @@ const App = ({ configUrl, roomName }) => (
 
             <div className='UIcontainer'>
 
-              <div className='toolBar'>
+              <div className='UItoolbar'>
 
                 <h1>{room.providedName}</h1>
 
@@ -66,7 +66,7 @@ const App = ({ configUrl, roomName }) => (
                 <RTC.UserControls render={({ user, isMuted, mute, unmute, setDisplayName }) => (
                   <div>
 
-                    <input
+                    <input className='displayNameEditor'
                       value={user.displayName}
                       onChange={(event) => {
                         setDisplayName(event.target.value.trim());

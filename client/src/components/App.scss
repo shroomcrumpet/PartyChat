@@ -1,24 +1,104 @@
 
 .UIcontainer {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+}
+
+.UItoolbar {
+	display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 56px;
+  background: #00b0e9;
+  color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px -1px, rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px;
+  z-index: 1;
+
+  h1 {
+    font-size: 20px;
+    color: #fafafa;
+    margin-left: 16px;
+    font-weight: 400;
+  }
+
+  button {
+    margin-right: 16px;
+    background: #fafafa;
+    color: #212121;
+    border-radius: 5px;
+    padding: 5px;
+    font-weight: bold;
+  }
+
+  .displayNameEditor {
+    display: inline;
+  }
+}
+
+.mainContainer {
 
 }
 
-// #localVideo {
-// 	height: 250px;
-// 	background-color: pink;
-// }
+.videoContainer {
 
-// #remoteVideos video {
-// 	max-height: 250px;
-// 	background-color: yellow;
-// }
+}
 
-// #text-chat {
-// 	height: 200px;
-// 	background-color: grey;
-// 	overflow-y: scroll;
-// }
+.chatContainer {
 
-// .App {
-//   text-align: center;
-// }
+}
+
+.chatList {
+
+}
+
+.chatMsgGroup {
+
+}
+
+.chatMsgMetadata {
+
+}
+
+.chatDisplayName {
+
+}
+
+.chatTimeStamp {
+
+}
+
+.chatMsg {
+
+}
+
+.chatInputContainer {
+
+}
+
+.chatTyping {
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
