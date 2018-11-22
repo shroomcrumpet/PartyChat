@@ -25,6 +25,123 @@ const App = ({ configUrl, roomName }) => (
 
       <RTC.Room name={roomName}>
 
+        {({ room, peers, localMedia, remoteMedia }) => {
+
+          if (!room.joined) {
+            return <h1>Joining {roomName}...</h1>;
+          };
+
+          const remoteVideos = remoteMedia.filter(media => media.kind === 'video');
+          const localVideos = localMedia.filter(media => media.kind === 'video' && media.shared);
+          const localScreens = localVideos.filter(media => media.screenCapture);
+
+          return (
+
+            <div className='UIcontainer'>
+
+              <div className='toolBar'>
+
+                <h1>{room.providedName}</h1>
+
+                <div>
+                  <span>{peers.length + 1} Participant{peers.length !== 0 ? 's' : ''}</span>
+                  <RTC.PeerList room={room.address} speaking render={({ peers }) => {
+                    if (peers.length === 0) {
+                      return null;
+                    }
+                    return (<span> ({peers.length} speaking)</span>);
+                  }} />
+                </div>
+
+                <div>
+                  {/* No local screenshares */}
+                  {!localScreens.length && <RTC.RequestDisplayMedia />}
+
+                  {/* autoRemove removes media track once it has been unshared */}
+                  {!!localScreens.length && <RTC.MediaControls media={localScreens[0]} autoRemove render={({ stopSharing }) => (
+                    <button onClick={stopSharing}>Stop Screenshare</button>
+                  )} />}
+                </div>
+
+                <RTC.UserControls render={({ user, isMuted, mute, unmute, setDisplayName }) => (
+                  <div>
+
+                    <input
+                      value={user.displayName}
+                      onChange={(event) => {
+                        setDisplayName(event.target.value.trim());
+                      }}
+                    />
+
+                    <button onClick={() => isMuted ? unmute() : mute()}>
+                      {isMuted ? 'Unmute' : 'Mute'}
+                    </button>
+
+                  </div>
+                )} />
+
+              </div>
+
+              <div className='mainContainer'>
+
+                <div className='videoContainer'>
+                  <RTC.GridLayout
+                    className='videoGrid'
+                    items={localVideos.concat(remoteVideos)}
+                    renderCell={(item) => (<RTC.Video media={item} />)}
+                  />
+                </div>
+
+                <div className='chatContainer'>
+
+                  <RTC.ChatList
+                    room={room.address}
+                    className='chatList'
+                    renderGroup={({ chats, peer }) => (
+                      <div className='chatMsgGroup' key={chats[0].id}>
+
+                        <div className='chatMsgMetadata'>
+                          <div className='chatDisplayName'>
+                            {peer.displayName ? peer.displayName : 'Anonymous'}
+                          </div>
+                          {' '}
+                          <div className='chatTimeStamp'>
+                            {chats[0].time.toLocaleTimeString()}
+                          </div>
+                        </div>
+
+                        {chats.map(message => (
+                          <div className='chatMsg' key={message.id}>{message.body}</div>
+                        ))}
+
+                      </div>
+                    )}
+                  />
+
+                  <div className='chatInputContainer'>
+
+                    <RTC.ChatInput
+                      room={room.address}
+                      placeholder='Send a message...'
+                    />
+
+                    {/* Receives list of peers typing in room - provide a custom render */}
+                    <RTC.ChatComposers className='chatTyping' room={room.address} />
+
+                  {/* chatInputContainer */}
+                  </div>
+
+                {/* chatContainer */}
+                </div>
+
+              {/* mainContainer */}
+              </div>
+
+            {/* UIcontainer */}
+            </div>
+          );
+        }}
+
       </RTC.Room>
 
     </RTC.Connected>
@@ -33,108 +150,5 @@ const App = ({ configUrl, roomName }) => (
 );
 
 
-
-
-// class App extends Component {
-
-//   constructor(props) {
-//     super(props);
-
-//     this.state = {
-//       username: generateName(),
-//     };
-
-//     // this.webrtc = new SimpleWebRTC({
-//     //   localVideoEl: 'localVideo',
-//     //   remoteVideosEl: 'remoteVideos',
-//     //   autoRequestMedia: true,
-//     // });
-
-//     this.handleChatSubmit = this.handleChatSubmit.bind(this);
-//     this.addToChat = this.addToChat.bind(this);
-//     this.onChangeName = this.onChangeName.bind(this);
-//   };
-
-
-//   handleChatSubmit(event) {
-//     event.preventDefault();
-//     let msg = event.target[0].value;
-
-//     // if (msg) {
-//     //   this.webrtc.sendDirectlyToAll('p2pchat', 'chat', {
-//     //     username: this.state.username,
-//     //     message: msg,
-//     //   });
-//     //   event.target[0].placeholder = '';
-//     //   event.target[0].value = '';
-//     //   this.addToChat(`${this.state.username} (me)`, msg);
-//     // } else {
-//     //   event.target[0].placeholder = 'Cannot be blank';
-//     // };
-//   };
-
-//   addToChat(name, message) {
-//     let newText = document.createElement('p');
-//     newText.textContent = `${name}: ${message}`;
-//     document.querySelector('#text-chat').appendChild(newText);
-//   };
-
-//   onChangeName(event) {
-//     this.setState({username: event.target.value});
-//   };
-
-
-//   componentDidMount() {
-//     const reactThis = this;
-
-//     console.log(this.props);
-
-//     // this.webrtc.on('readyToCall', function () {
-//     //   console.log("Joining room: ", reactThis.props.match.params.roomname);
-//     //   reactThis.webrtc.joinRoom(reactThis.props.match.params.roomname);
-//     // });
-
-//     // this.webrtc.on('channelMessage', function (label, type, data) {
-
-//     //   if (data.type === 'chat') {
-//     //     reactThis.addToChat(data.payload.username, data.payload.message);
-//     //   };
-//     // });
-//   }
-
-
-//   render() {
-
-//     return (
-//       <div className="App">
-
-//         <div className="videoDiv">
-//           <div>
-//             <video id="localVideo"></video>
-//           </div>
-
-//           <div>
-//             <div id="remoteVideos"></div>
-//           </div>
-//         </div>
-
-//         <div className="chatDiv">
-
-//           <div id="text-chat"></div>
-
-//           <span>Your name: </span>
-//           <input onChange={this.onChangeName} value={this.state.username} />
-
-//           <form onSubmit={this.handleChatSubmit}>
-//             <input id="chat-box" placeholder="Enter chat message" />
-//             <input type="submit" value="Send" />
-//           </form>
-
-//         </div>
-
-//       </div>
-//     );
-//   }
-// }
-
 export default App;
+
