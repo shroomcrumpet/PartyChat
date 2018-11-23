@@ -114,7 +114,7 @@ const App = ({ configUrl, roomName }) => (
                           </span>
                           {' '}
                           <span className='chatTimeStamp'>
-                            {chats[0].time.toLocaleTimeString()}
+                            {chats[0].time.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit', hour12: true})}
                           </span>
                         </p>
 
