@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from "react-redux";
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom'
 import { createStore, Actions, Selectors } from "@andyet/simplewebrtc";
-import './index.css';
+import './index.scss';
 
 import Landing from './components/Landing';
 import App from './components/App';
@@ -23,15 +23,22 @@ const routing = (
   <Router>
     <div>
 
-      <header className="App-header">
-        <img src={react_logo} className="App-logo" alt="logo" />
-        <a href='/'>
-          <code>Partychat</code>
-        </a>
-      </header>
-
       <Switch>
-        <Route exact path="/" component={Landing} />
+
+        <Route exact path="/">
+          <div>
+          {/*
+            <header className="App-header">
+              <img src={react_logo} className="App-logo" alt="logo" />
+              <a href='/'>
+                <code>Partychat</code>
+              </a>
+            </header>
+          */}
+            <Landing />
+          </div>
+        </Route>
+
         <Route exact path="/:roomname">
           <Provider store={store}>
             <App
@@ -40,6 +47,7 @@ const routing = (
             />
           </Provider>
         </Route>
+
       </Switch>
 
     </div>

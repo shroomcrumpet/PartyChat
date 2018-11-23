@@ -1,3 +1,8 @@
+:root {
+  --pinky: #D12063;
+}
+
+
 body {
   margin: 0;
 	font-size: 14px;
@@ -7,6 +12,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/*img {
+  vertical-align: middle;
+  margin: 5px;
+  border-radius: 5px;
+}*/
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",

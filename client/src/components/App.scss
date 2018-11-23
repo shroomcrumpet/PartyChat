@@ -1,3 +1,8 @@
+.connectionStatus{
+	margin-top: 10vh;
+	text-align: center;
+	color: var(--pinky);
+}
 
 .UIcontainer {
   display: flex;
@@ -11,7 +16,7 @@
   justify-content: space-between;
   align-items: center;
   height: 56px;
-  background: #00b0e9;
+  background: var(--pinky);
   color: #fff;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px -1px, rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px;
   z-index: 1;
@@ -38,47 +43,100 @@
 }
 
 .mainContainer {
-
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr;
+  grid-template-areas: "video video video chat";
+  background: #e6eaed;
 }
 
 .videoContainer {
+  grid-area: video;
+  overflow: hidden;
 
+  .videoGrid {
+    height: 100%;
+  }
+
+  video {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    justify-self: center;
+    align-self: center;
+  }
 }
 
 .chatContainer {
-
+  grid-area: chat;
+  overflow: hidden;
+  border-left: 2px solid #dddddd;
+  background: #fafafa;
+  display: flex;
+  flex-direction: column;
 }
 
 .chatList {
-
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 10px;
 }
 
 .chatMsgGroup {
+  margin-top: 16px;
+  padding: 0 10px;
 
+  img {
+    height: 32px;
+    width: 32px;
+    float: left;
+  }
 }
 
 .chatMsgMetadata {
-
+  margin: 0;
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 40px;
 }
 
 .chatDisplayName {
-
+  font-weight: bold;
 }
 
 .chatTimeStamp {
-
+  color: #dddddd;
+  font-size: 14px;
 }
 
 .chatMsg {
-
+  margin: 0;
+  margin-left: 40px
 }
 
 .chatInputContainer {
+  padding: 5px;
+  border-top: 0px solid #dddddd;
 
+  textarea {
+    border-radius: 2px;
+    border-color: #dddddd;
+    width: 100%;
+    height: 50px;
+    padding: 5px;
+    overflow-y: auto;
+    resize: none;
+  }
 }
 
 .chatTyping {
-
+  height: 20px;
+  font-size: 12px;
+  padding-left: 10px;
 }
 
 

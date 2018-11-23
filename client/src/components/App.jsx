@@ -12,11 +12,15 @@ const App = ({ configUrl, roomName }) => (
     <RTC.RemoteAudioPlayer />
 
     <RTC.Connecting>
-      <h1>Client is connecting...</h1>
+      <div className='connectionStatus'>
+        <h3>Client is connecting...</h3>
+      </div>
     </RTC.Connecting>
 
     <RTC.Disconnected>
-      <h1>Client lost connection. Attempting to rejoin...</h1>
+      <div className='connectionStatus'>
+        <h3>Client lost connection. Attempting to rejoin...</h3>
+      </div>
     </RTC.Disconnected>
 
     <RTC.Connected>
@@ -28,7 +32,11 @@ const App = ({ configUrl, roomName }) => (
         {({ room, peers, localMedia, remoteMedia }) => {
 
           if (!room.joined) {
-            return <h1>Joining {roomName}...</h1>;
+            return (
+              <div className='connectionStatus'>
+                <h3>Joining {roomName}...</h3>
+              </div>
+              );
           };
 
           const remoteVideos = remoteMedia.filter(media => media.kind === 'video');
@@ -100,18 +108,18 @@ const App = ({ configUrl, roomName }) => (
                     renderGroup={({ chats, peer }) => (
                       <div className='chatMsgGroup' key={chats[0].id}>
 
-                        <div className='chatMsgMetadata'>
-                          <div className='chatDisplayName'>
+                        <p className='chatMsgMetadata'>
+                          <span className='chatDisplayName'>
                             {peer.displayName ? peer.displayName : 'Anonymous'}
-                          </div>
+                          </span>
                           {' '}
-                          <div className='chatTimeStamp'>
+                          <span className='chatTimeStamp'>
                             {chats[0].time.toLocaleTimeString()}
-                          </div>
-                        </div>
+                          </span>
+                        </p>
 
                         {chats.map(message => (
-                          <div className='chatMsg' key={message.id}>{message.body}</div>
+                          <p className='chatMsg' key={message.id}>{message.body}</p>
                         ))}
 
                       </div>

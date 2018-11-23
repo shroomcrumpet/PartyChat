@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as UUID from "uuid";
+import './Landing.scss';
 
 
 class Landing extends React.Component {
@@ -24,11 +25,21 @@ class Landing extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='container'>
+
+        <h1><code>Partychat</code></h1>
+        <p>Truly simple video chat</p>
 
         <form onSubmit={this.routeToRoom}>
-          <input placeholder="Choose a room name" />
-          <input type="submit" value="Start chat" />
+          <span className='createRoomInputWrapper'>
+            <span className='createRoomDomain'>partychat.herokuapp.com/</span>
+            <input className='createRoomInput' placeholder="Choose a room name" />
+          </span>
+
+            <button className='createRoomSubmit' type="submit">
+              Start a chat
+            </button>
+
         </form>
 
       </div>

@@ -1,0 +1,69 @@
+.container {
+	display: flex;
+	height: 75vh;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	h1 {
+		font-size: calc(30px + 2vmin);
+		color: var(--pinky);
+	}
+
+	p {
+		font-size: calc(10px + 1vmin);
+		color: #656565;
+	}
+}
+
+.createRoomInputWrapper {
+	border: 1px var(--pinky) solid;
+	padding: 10px;
+	border-radius: 3px;
+}
+
+.createRoomDomain {
+	color: #b7c0c3;
+}
+
+.createRoomInput {
+	border: none;
+	color: var(--pinky);
+	font: inherit;
+	font-size: inherit;
+
+	&:focus{
+		outline: none;
+	}
+}
+
+.createRoomSubmit {
+	background-color: var(--pinky);
+	color: white;
+	cursor: pointer;
+	border: none;
+	border-radius: 3px;
+	transition-duration: .3s;
+	transition-timing-function: ease-in;
+	transition-property: background, border-color;
+	user-select: none;
+	padding: 11px;
+	font: inherit;
+	font-size: inherit;
+
+	&:hover {
+		background-color: #9B194B;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
