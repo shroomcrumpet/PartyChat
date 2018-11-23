@@ -74,12 +74,15 @@ const App = ({ configUrl, roomName }) => (
                 <RTC.UserControls render={({ user, isMuted, mute, unmute, setDisplayName }) => (
                   <div>
 
-                    <input className='displayNameEditor'
-                      value={user.displayName}
-                      onChange={(event) => {
-                        setDisplayName(event.target.value.trim());
-                      }}
-                    />
+                    <span className='displayNameEditorWrapper'>
+                      <span>name: </span>
+                      <input className='displayNameEditor'
+                        value={user.displayName}
+                        onChange={(event) => {
+                          setDisplayName(event.target.value.trim());
+                        }}
+                      />
+                    </span>
 
                     <button onClick={() => isMuted ? unmute() : mute()}>
                       {isMuted ? 'Unmute' : 'Mute'}

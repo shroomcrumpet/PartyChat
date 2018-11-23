@@ -43,7 +43,18 @@
   }
 
   .displayNameEditor {
+  	padding: 0!important;
     display: inline;
+    border: none;
+    font: inherit;
+    font-size: inherit;
+    color: #fafafa;
+    font-weight: bold;
+    background: none;
+
+		&:focus{
+			outline: none;
+		}
   }
 }
 
