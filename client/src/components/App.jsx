@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import generateName from 'sillyname';
 import * as RTC from "@andyet/simplewebrtc";
 
@@ -25,7 +25,7 @@ const App = ({ configUrl, roomName }) => (
 
     <RTC.Connected>
 
-      <RTC.RequestUserMedia audio video auto />
+      <RTC.RequestUserMedia audio={true} video={true} auto />
 
       <RTC.Room name={roomName}>
 
@@ -99,7 +99,7 @@ const App = ({ configUrl, roomName }) => (
                   <RTC.GridLayout
                     className='videoGrid'
                     items={localVideos.concat(remoteVideos)}
-                    renderCell={(item) => (<RTC.Video media={item} />)}
+                    renderCell={(item) => (<RTC.Video media={Object.assign(item, { width: 400, height: 400 })} />)}
                   />
                 </div>
 

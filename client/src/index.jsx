@@ -8,7 +8,7 @@ import './index.scss';
 import Landing from './components/Landing';
 import App from './components/App';
 
-import react_logo from './react_logo.svg';
+// import react_logo from './react_logo.svg';
 
 
 const CONFIG_URL = `https://api.simplewebrtc.com/config/guest/${process.env.REACT_APP_RTC_API_KEY}`

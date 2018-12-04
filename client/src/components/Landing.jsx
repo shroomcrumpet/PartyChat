@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import * as UUID from "uuid";
 import './Landing.scss';
 
@@ -27,7 +27,7 @@ class Landing extends React.Component {
     return (
       <div className='container'>
 
-        <h1><code>Partychat</code></h1>
+        <h1><code>PartyChat</code></h1>
         <p>Truly simple video chat</p>
 
         <form onSubmit={this.routeToRoom}>
